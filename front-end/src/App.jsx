@@ -15,9 +15,9 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<HomePage />}/>
-        <Route path="model" element={<Model />} />
-        <Route path="about" element={<About />} />
-        <Route path="*" element={<NoPage />} />
+        <Route path="model" element={<Model />}/>
+        <Route path="about" element={<About />}/>
+        <Route path="*" element={<NoPage />}/>
       </Routes>
       <Footer/>
     </Router>

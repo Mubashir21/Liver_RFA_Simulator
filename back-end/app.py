@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 import torch
-from model import load_model, plot_image
+from helper import load_model, plot_image, makeVideo
 from config import MODEL_PATH
 from flask_cors import CORS
+import numpy as np
+from tqdm import tqdm
 
 
 app = Flask(__name__)
@@ -13,34 +15,48 @@ if torch.cuda.is_available:
 else:
     print("CUDA is unavailable. Running on CPU")
 
-# model = load_model(model_path=MODEL_PATH)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# @app.route('/predict', methods=["POST"])
-# def predict():
-#     if request.method == "POST":
-#         data = request.get_json()
-#         inputs = data['inputs']
+model = load_model(MODEL_PATH)
 
-#         input_tensor = torch.tensor(inputs)
+@app.route('/predict', methods=["POST"])
+def predict():
+    file = request.files['file']
 
-#         with torch.no_grad():
-#             output = model(input_tensor)
+    if file and file.filename.endswith('.npy'):
+        # Proceed with loading the .npy file
+        array = np.load(file.stream)
+        # Process the numpy array as needed
 
-#             response = output.numpy().tolist()
+        input_tensor = torch.tensor(array).unsqueeze(0).unsqueeze(0).to(torch.float).to(device)
+        prediction = input_tensor
+        simulation = []
 
-#         return jsonify(response)
+        with torch.no_grad():
+            print("hello")
+            for i in tqdm(range(40)):
+                input = prediction
+                prediction = model(input)
+                simulation.append(prediction.cpu().numpy())
+        
+        makeVideo(simulation)
+
+        return 'File uploaded and processed successfully'
+    else:
+        return 'Invalid file format', 400  # Return a 400 Bad Request response for non-.npy files
+
+        # input_tensor = torch.tensor(inputs)
+
+        # with torch.no_grad():
+        #     output = model(input_tensor)
+
+        #     response = output.numpy().tolist()
+
+        # return jsonify(array.shape)
     
 @app.route("/")
 def index():
     return "hello, people"
-
-@app.route('/add', methods=["POST"])
-def add():
-    data = request.json
-    input_data = data['inputs']
-    print(input_data)
-    calc = input_data**2
-    return jsonify(calc)
 
 if __name__ == "__main__":
     app.run(debug=True)
