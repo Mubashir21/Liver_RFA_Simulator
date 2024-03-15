@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import torch
 from helper import load_model, plot_image, makeVideo
 from config import MODEL_PATH
@@ -33,26 +33,16 @@ def predict():
         simulation = []
 
         with torch.no_grad():
-            print("hello")
             for i in tqdm(range(40)):
                 input = prediction
                 prediction = model(input)
                 simulation.append(prediction.cpu().numpy())
         
-        makeVideo(simulation)
+        file_name = makeVideo(simulation)
 
-        return 'File uploaded and processed successfully'
+        return send_file(f"static/simulation_videos/{file_name}.mp4", mimetype='video/mp4')
     else:
         return 'Invalid file format', 400  # Return a 400 Bad Request response for non-.npy files
-
-        # input_tensor = torch.tensor(inputs)
-
-        # with torch.no_grad():
-        #     output = model(input_tensor)
-
-        #     response = output.numpy().tolist()
-
-        # return jsonify(array.shape)
     
 @app.route("/")
 def index():

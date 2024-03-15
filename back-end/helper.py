@@ -2,12 +2,15 @@ import torch
 from neuralop.models import FNO
 from scipy.io import loadmat
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
+import matplotlib.pyplot as plt 
 import os
 import imageio
 import datetime
 from tqdm import tqdm
-import shutil
+import os
+
+matplotlib.use('Agg')  # Use the 'Agg' backend for file generation without display
 
 def load_model(model_path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -40,6 +43,7 @@ def makeAndSaveImage(sample, index):
     plt.colorbar(label='Temperature (°C)')
     heatmap.set_clim(vmin, vmax)  # Set the colorbar scale explicitly
     plt.axis(False)
+    plt.title(f"Prediction at Time: {index * 5} seconds")
     plt.savefig(f'static/temp_pictures/plot_{index}.png') # Save each plot
     plt.close()
     
@@ -57,9 +61,24 @@ def makeVideo(samples):
     file_name = filenameMaker()
     imageio.mimsave(f'static/simulation_videos/{file_name}.mp4', images, fps=10) # Save as MP4
 
-    shutil.rmtree("static/temp_pictures")
-
+    delete_folder_contents("static/temp_pictures")
+    
+    return file_name
 
 def filenameMaker():
     x = datetime.datetime.now()
     return f"{x.strftime('%H')}_{x.strftime('%M')}_{x.strftime('%S')} - ({x.strftime('%d')}-{x.strftime('%m')}-{x.strftime('%y')})"
+
+def delete_folder_contents(folder_path):
+    # Iterate over all the files and subdirectories in the given folder
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+        # Check if the current item is a file
+        if os.path.isfile(item_path):
+            # If it's a file, delete it
+            os.remove(item_path)
+        # If it's a directory, recursively call the function to delete its contents
+        elif os.path.isdir(item_path):
+            delete_folder_contents(item_path)
+            # After deleting the contents, remove the empty directory
+            os.rmdir(item_path)
