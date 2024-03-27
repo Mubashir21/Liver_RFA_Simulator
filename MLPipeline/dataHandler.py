@@ -16,7 +16,7 @@ def retrieveData(input="no"):
         return case_k, case_w, case_sig
 
 def AddMoreChannels():
-    case_k_values = {"T_k1" : 0.46, "T_k2" : 0.48, "T_k3" : 0.50, "T_k4" : 0.52, "T_k5" : 0.52}
+    case_k_values = {"T_k1" : 0.46, "T_k2" : 0.48, "T_k3" : 0.50, "T_k4" : 0.52, "T_k5" : 0.54}
     case_w_values = {"T_w1" : 0.0045, "T_w2" : 0.0055, "T_w3" : 0.0065, "T_w4" : 0.0075, "T_w5" : 0.0085}
     case_sig_values = {"T_sig1" : 0.0045, "T_sig2" : 0.0055, "T_sig3" : 0.0065, "T_sig4" : 0.0075, "T_sig5" : 0.0085}
     
