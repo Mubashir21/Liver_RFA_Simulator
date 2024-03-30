@@ -1,10 +1,12 @@
-
+import Hero from "../components/Hero";
 
 function About() {
-
-    return(
-        <p>About Page</p>
-    )
+  return (
+    <>
+      <Hero />
+      <p>About Page</p>
+    </>
+  );
 }
 
-export default About
+export default About;
