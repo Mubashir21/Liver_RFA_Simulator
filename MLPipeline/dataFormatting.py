@@ -1,12 +1,6 @@
 from scipy.io import loadmat
-import pandas as pd
 import torch
-from torch.utils.data import Dataset, DataLoader
-from torch import nn
 import numpy as np
-from neuralop.models import FNO
-import matplotlib.pyplot as plt
-from neuralop import LpLoss, H1Loss
 
 ## import data into python
 try:

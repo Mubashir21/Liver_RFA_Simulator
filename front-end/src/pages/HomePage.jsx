@@ -1,10 +1,11 @@
-
+import Hero from "../components/Hero";
 
 function HomePage() {
-
-    return(
-        <p>Home Page</p>
-    )
+  return (
+    <>
+      <Hero />
+    </>
+  );
 }
 
-export default HomePage
+export default HomePage;
