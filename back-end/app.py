@@ -22,6 +22,12 @@ model = load_model(MODEL_PATH)
 @app.route('/predict', methods=["POST"])
 def predict():
     file = request.files['file']
+    k = float(request.form.get('k'))
+    w = float(request.form.get('w'))
+    sig = float(request.form.get('sig'))
+    duration = int(request.form.get('duration'))
+    print(k, w, sig, duration, type(k), type(w), type(sig), type(duration))
+
 
     if file and file.filename.endswith('.npy'):
         # Proceed with loading the .npy file
@@ -31,12 +37,22 @@ def predict():
         input_tensor = torch.tensor(array).unsqueeze(0).unsqueeze(0).to(torch.float).to(device)
         prediction = input_tensor
         simulation = []
-
-        with torch.no_grad():
-            for i in tqdm(range(40)):
-                input = prediction
+        k_val = 3
+        w_val = 1
+        sig_val = 1
+        params_tensor = torch.tensor([[k, w, sig]]).view(1, 3, 1, 1).expand(-1, -1, 101, 101).to(device)
+        input = torch.cat((prediction, params_tensor), dim=1)
+        
+        with torch.inference_mode():
+            for i in tqdm(range(duration)):
                 prediction = model(input)
-                simulation.append(prediction.cpu().numpy())
+                simulation.append(prediction.squeeze().detach().cpu().numpy())
+                input = torch.cat((prediction, params_tensor), dim=1)
+        # with torch.no_grad():
+        #     for i in tqdm(range(40)):
+        #         input = prediction
+        #         prediction = model(input)
+        #         simulation.append(prediction.cpu().numpy())
         
         file_name = makeVideo(simulation)
 

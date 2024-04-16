@@ -1,2 +1,2 @@
 # Model path
-MODEL_PATH = "models/FNO3.pth"
+MODEL_PATH = "models/FNO-5.pth"

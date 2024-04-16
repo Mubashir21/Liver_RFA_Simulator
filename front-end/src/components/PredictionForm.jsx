@@ -4,21 +4,22 @@ import { Dialog, Transition } from "@headlessui/react";
 import { IconX } from "@tabler/icons-react";
 
 function PredictionForm() {
-  const [file, setFile] = useState(null); // For the input data
-  const [videoPath, setVideoPath] = useState(""); // For the prediction result
+  const [file, setFile] = useState(null);
+  const [videoPath, setVideoPath] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [k, setK] = useState("");
+  const [w, setW] = useState("");
+  const [sig, setSig] = useState("");
+  const [duration, setDuration] = useState("");
   const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submit action
-
-    // Check if a file is selected
+    e.preventDefault();
     if (!file) {
       alert("No file selected");
       return;
@@ -29,18 +30,20 @@ function PredictionForm() {
     try {
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("k", k);
+      formData.append("w", w);
+      formData.append("sig", sig);
+      formData.append("duration", duration);
 
-      // Send POST request to Flask server
       const response = await fetch("http://localhost:5000/predict", {
         method: "POST",
-        body: formData, // Sending the file content as array
+        body: formData,
       });
 
       if (response.ok) {
-        console.log("File uploaded successfully");
-        const videoBlob = await response.blob(); // Get the video blob from the response
-        const videoURL = URL.createObjectURL(videoBlob); // Create a URL for the video
-        setVideoPath(videoURL); // Update state to hold the video URL
+        const videoBlob = await response.blob();
+        const videoURL = URL.createObjectURL(videoBlob);
+        setVideoPath(videoURL);
         setShowPopup(true);
       } else {
         throw new Error("Network response was not ok.");
@@ -65,7 +68,6 @@ function PredictionForm() {
           onSubmit={handleSubmit}
           className="flex flex-col space-y-4 p-4 rounded-lg"
         >
-          {/* File input */}
           <input
             type="file"
             accept=".npy"
@@ -73,8 +75,34 @@ function PredictionForm() {
             ref={fileInputRef}
             className="py-2 px-4 focus:outline-none focus:border-blue-500"
           />
-
-          {/* Submit button */}
+          <input
+            type="number"
+            placeholder="Enter k value"
+            value={k}
+            onChange={(e) => setK(e.target.value)}
+            className="py-2 px-4 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="number"
+            placeholder="Enter w value"
+            value={w}
+            onChange={(e) => setW(e.target.value)}
+            className="py-2 px-4 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="number"
+            placeholder="Enter sig value"
+            value={sig}
+            onChange={(e) => setSig(e.target.value)}
+            className="py-2 px-4 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="number"
+            placeholder="Enter duration"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            className="py-2 px-4 focus:outline-none focus:border-blue-500"
+          />
           <button
             type="submit"
             className="py-2 px-4 bg-black text-white rounded-md hover:bg-gray-800 focus:outline-none focus:bg-blue-600"
@@ -82,7 +110,6 @@ function PredictionForm() {
             Submit
           </button>
         </form>
-
         {isLoading && (
           <Transition appear show={isLoading} as={Fragment}>
             <Dialog

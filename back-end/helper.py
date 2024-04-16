@@ -1,5 +1,5 @@
 import torch
-from neuralop.models import FNO
+from neuralop.models import FNO2d
 from scipy.io import loadmat
 import numpy as np
 import matplotlib
@@ -15,7 +15,8 @@ matplotlib.use('Agg')  # Use the 'Agg' backend for file generation without displ
 def load_model(model_path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(device)
-    model = FNO(n_modes=(16, 16), hidden_channels=32, in_channels=1, out_channels=1).to(device)
+    model = FNO2d(n_modes_height=32, n_modes_width=32, hidden_channels=32, projection_channels=101,
+                in_channels=4, out_channels=1).to(device)
 
     model.load_state_dict(torch.load(model_path))
     model.eval()
@@ -59,7 +60,7 @@ def makeVideo(samples):
         images.append(imageio.imread(f'static/temp_pictures/plot_{time_point}.png'))
 
     file_name = filenameMaker()
-    imageio.mimsave(f'static/simulation_videos/{file_name}.mp4', images, fps=10) # Save as MP4
+    imageio.mimsave(f'static/simulation_videos/{file_name}.mp4', images, fps=24) # Save as MP4
 
     delete_folder_contents("static/temp_pictures")
     

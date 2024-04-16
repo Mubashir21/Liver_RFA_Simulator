@@ -116,8 +116,8 @@ def makePredictions(model, timestamps, input):
     # w_val = round(input[0][2][0][0].item(), 4)
     # sig_val = round(input[0][3][0][0].item(), 4)
     k_val = 3
-    w_val = 3
-    sig_val = 3
+    w_val = 1
+    sig_val = 1
     params_tensor = torch.tensor([[k_val, w_val, sig_val]]).view(1, 3, 1, 1).expand(-1, -1, 101, 101).to(device)
     input = torch.cat((input, params_tensor), dim=1)
     

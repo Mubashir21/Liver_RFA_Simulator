@@ -42,14 +42,14 @@ def plot_truth_vs_prediction_sequence(truth, prediction, message_truth="Truth", 
         fig.colorbar(heatmap1, ax=axs[0], label='Temperature (°C)')
         heatmap1.set_clim(vmin, vmax)
         axs[0].axis('off')
-        axs[0].set_title(f"{message_truth} at time={index * 5}")
+        axs[0].set_title(f"{message_truth} at time={index * 5}", fontsize=20)
         
         # Plot prediction data on the right
         heatmap2 = axs[1].imshow(prediction[index].squeeze(), cmap='inferno', interpolation='nearest')
         fig.colorbar(heatmap2, ax=axs[1], label='Temperature (°C)')
         heatmap2.set_clim(vmin, vmax)
         axs[1].axis('off')
-        axs[1].set_title(f"{message_prediction} at time={index * 5}")
+        axs[1].set_title(f"{message_prediction} at time={index * 5}", fontsize=20)
         
         plt.tight_layout()
         plt.savefig(f'static/temp_pictures/comparison_{index}.png')  # Save each plot
