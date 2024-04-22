@@ -60,10 +60,7 @@ function PredictionForm() {
 
   return (
     <div className="h-96 flex items-center justify-center">
-      <div className="max-w-lg flex flex-col text-center border border-black p-5 rounded-xl shadow-xl">
-        <div className="text-gray-900 text-5xl font-bold mb-10">
-          <h1>Predict</h1>
-        </div>
+
         <form
           onSubmit={handleSubmit}
           className="flex flex-col space-y-4 p-4 rounded-lg"
@@ -207,7 +204,6 @@ function PredictionForm() {
           </div>
         )}
       </div>
-    </div>
   );
 }
 
