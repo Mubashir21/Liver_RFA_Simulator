@@ -66,20 +66,20 @@ const ModelPrediction = () => {
 
 const ModelExample = ({ isError, setIsError }) => {
   return (
-    <div className="px-80 pb-16 bg-zinc-300">
+    <div className="px-80 pb-16 bg-gray-200">
       <div className="py-8">
-        <div className=" bg-white z-30 w-fit flex justify-center m-auto p-3 border solid border-black rounded-lg">
+        <div className=" bg-gray-900 z-30 -mt-16 w-fit flex gap-1 p-1 mb-8 text-center text-lg justify-center m-auto border solid border-black rounded-lg shadow-lg">
           <div
-            className={`border solid border-black  p-3 rounded-md mx-1 ${
-              isError ? "hover:bg-slate-400" : "bg-slate-500"
+            className={`font-bold  p-3 rounded-md transition-all cursor-pointer w-96 ${
+              isError ? "bg-white hover:bg-gray-300" : "bg-gray-900 text-white "
             }`}
             onClick={() => setIsError(false)}
           >
             Comparison
           </div>
           <div
-            className={`border solid border-black p-3 rounded-md mx-1 ${
-              isError ? "bg-slate-500" : "hover:bg-slate-400"
+            className={`font-bold p-3 rounded-md transition-all cursor-pointer w-96 ${
+              isError ? "text-white bg-gray-900" : "hover:bg-gray-300 bg-white"
             }`}
             onClick={() => setIsError(true)}
           >
@@ -99,7 +99,7 @@ const TruthPred = () => {
         <video
           src={realPred}
           controls
-          className="aspect-video shadow-2xl border-solid border border-black rounded-xl"
+          className="aspect-video shadow-2xl border-solid border-4 border-gray-400 rounded-xl bg-white"
         ></video>
       </div>
       <div className="flex-1 my-1 pl-16">
@@ -127,12 +127,12 @@ const TruthPred = () => {
 
 const PredTruthError = () => {
   return (
-    <div className="flex">
+    <div className="flex ">
       <div className="flex-1">
         <video
           src={realPredRMSE}
           controls
-          className="aspect-video shadow-2xl border-solid border border-black rounded-xl"
+          className="aspect-video shadow-2xl border-solid border-4 border-gray-400 rounded-xl bg-white"
         ></video>
       </div>
       <div className="flex-1 my-1 pl-16">
