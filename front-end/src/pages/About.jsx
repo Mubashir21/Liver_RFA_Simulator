@@ -21,37 +21,32 @@ function About() {
             </section>
 
 
-            <section className="relative h-screen">
-                {/* Background video */}
-                <div className="relative h-screen">
-                    <video className="background-video w-full h-full object-cover" src={backgroundVideos.part1} autoPlay loop muted />
-                    <div className="absolute inset-0" style={{ opacity: '0.78', backgroundColor: '#001B3A' }}></div>
-                </div>
-
-
-
-                <div className="absolute inset-0 flex flex-col md:flex-row justify-center items-center"> {/* Center content vertically and horizontally */}
-                    <div className="w-full md:w-1/2 flex items-center justify-center">
-                        <div className="text-center">
-                <br/><br/>
-                <img className="mx-auto mb-4 object-cover w-2/3 h-full md:w-2/3 md:h-full lg:w-2/3 lg:h-full" src="Liver-cancer.jpg" alt="Liver" />
-                <div className="mt-2 italic text-center">
-                        <p>Liver cells with hepatocellular carcinoma (HCC)</p>
+            <section className="relative">
+            <div className="relative h-screen">
+                <div className="absolute inset-0 bg-gray-900"></div>
+            </div>
+            <div className="absolute inset-0 flex flex-col md:flex-row justify-center items-center"> {/* Center content vertically and horizontally */}
+                <div className="w-full md:w-1/2 flex items-center justify-center">
+                    <div className="text-center">
+                        <br/><br/>
+                        <img className="mx-auto mb-4 pl-20 object-cover w-auto h-1/4" src="Liver-cancer.jpg" alt="Liver" /> {/* Adjusted image size for different screen sizes */}
+                        <p className="text-lg italic mt-2">Liver cells with hepatocellular carcinoma (HCC)</p> {/* Description below the image */}
                     </div>
+                </div>
+                <div className="w-full md:w-1/2 flex items-center justify-center p-4 ml-5 md:p-8">
+                    <div>
+                        <h2 className="italic text-3xl md:text-4xl lg:text-4xl sm:text-3xl font-bold mb-4 mt-2">What is Liver Cancer?</h2> {/* Adjusted text size for different screen sizes */}
+                        <p className="text-xl xl:text-xl md:text-base sm:text-base mt-10">Known as hepatic cancer, it refers to the abnormal growth of cells in the<br/>liver.
+                        Liver is a vital organ that is responsible for various functions<br/>such as detoxification, metabolism and storage of nutrients.</p> {/* Adjusted text size for different screen sizes */}
+                        <br/><br/><br/>
+                        <h2 className="italic text-3xl md:text-4xl lg:text-4xl sm:text-3xl font-bold mb-4">What are the Causes?</h2> {/* Adjusted text size for different screen sizes */}
+                        <p className="text-xl xl:text-xl md:text-base sm:text-base mt-9">1. Chronic Viral Hepatitis<br/><br/>2. Heavy Alcohol Use<br/><br/>3. Tobacco Use</p> {/* Adjusted text size for different screen sizes */}
+                  
+                    </div>
+                </div>
             </div>
-        </div>
-        <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
-            <div>
-                <h2 className=" italic font-semibold text-center lg:text-left text-2xl xl:text-4xl md:text-3xl sm:text-2xl lg:text-3xl mt-4 mb-4">What is Liver Cancer?</h2> 
-                <p className="text-base xl:text-base md:text-base sm:text-base text-center lg:text-left lg:text-base mt-4 mb-4">A cancer that starts in the liver. It occurs<br />when a malignant tumor grows on the liver.</p> {/* Adjusted text size for different screen sizes */}
-                <br/>
-                <h2 className=" italic font-semibold text-center lg:text-left text-2xl xl:text-4xl md:text-3xl sm:text-2xl lg:text-3xl mt-4 mb-4">Causes</h2> 
-                <p className="text-base xl:text-base md:text-base sm:text-base text-center lg:text-left lg:text-base mt-4 mb-4">1. Chronic Viral Hepatitis<br />2. Heavy Alcohol Use<br />3. Tobacco Use</p> {/* Adjusted text size for different screen sizes */}
-            </div>
-        </div>
-    </div>
+        </section>
 
-            </section>
             
             
 
