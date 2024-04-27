@@ -1,7 +1,7 @@
 import React, { useState, useRef, Fragment } from "react";
 import VideoPlayer from "./VideoPlayer";
 import { IconX } from "@tabler/icons-react";
-import loader_icon from "../assets/loader_icon.webp";
+import loader_icon from "../assets/videos/loader_icon.webp";
 
 // VideoModal Component
 function VideoModal({ isOpen, onClose, videoPath }) {
@@ -60,12 +60,51 @@ function PredictionForm() {
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
+    setErrors((prev) => ({ ...prev, file: "" }));
+  };
+
+  const validateForm = () => {
+    let count = 0;
+    // Validate file
+    if (!file) {
+      alert("Please enter a file.");
+      count++;
+    } else if (file.name.split(".").pop() != "npy") {
+      alert("Invalid file format. Input .npy file ONLY.");
+      count++;
+    }
+    // Validate k (example: k should be a positive number)
+    else if (!k || k < 0.46 || k > 0.54) {
+      alert("Enter a valid input for k. Range: 0.46-0.54");
+      count++;
+    } else if (!w || w < 0.0045 || w > 0.0085) {
+      alert("Enter a valid input for w. Range: 0.0045-0.0085");
+      count++;
+    } else if (!sig || sig < 0.0045 || sig > 0.0085) {
+      alert("Enter a valid input for sig. Range: 0.0045-0.0085");
+      count++;
+    }
+
+    if (count > 0) {
+      return true;
+    }
+
+    return false;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) {
-      alert("No file selected");
+
+    if (validateForm()) {
+      setDuration("");
+      setFile(null);
+      fileInputRef.current.value = "";
+      setIsLoading(false);
+      setK("");
+      setShowPopup(false);
+      setSig("");
+      setVideoPath("");
+      setW("");
       return;
     }
 

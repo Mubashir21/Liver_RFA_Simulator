@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import PredictionForm from "../components/PredictionForm";
-import realPred from "../assets/best_prediction_3_1_1.mp4";
-import realPredRMSE from "../assets/3way_comparison.mp4";
+import realPred from "../assets/videos/best_prediction_3_1_1.mp4";
+import realPredRMSE from "../assets/videos/3way_comparison.mp4";
 
 function Model() {
   const [isError, setIsError] = useState(false);

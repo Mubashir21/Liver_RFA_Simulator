@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import firstVideo from "../assets/videos/test1.mp4";
+import secondVideo from "../assets/videos/test7.mp4";
+import natureImage from "../assets/pictures/Nature.jpeg";
+import realTime from "../assets/pictures/realtime.jpg";
+import revolution from "../assets/pictures/revolution.jpg";
 
 function TypingEffect({ strings, typeSpeed, backSpeed, loop }) {
   const [text, setText] = useState("");
@@ -48,10 +53,8 @@ function HomePage() {
           loop
           muted
           className="absolute inset-0 w-full h-full object-cover z-0"
-        >
-          <source src="test1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          src={firstVideo}
+        ></video>
 
         <div className="absolute inset-0 bg-black opacity-40"></div>
 
@@ -84,7 +87,7 @@ function HomePage() {
         <div className="relative col-span-1">
           <div
             className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-            style={{ backgroundImage: "url('revolution.jpg')" }}
+            style={{ backgroundImage: `url(${revolution})` }}
           ></div>
           <div className="relative z-20 p-20 md:p-20 bg-black bg-opacity-80 h-full opacity-75 transition-opacity duration-500 hover:opacity-100">
             <h2 className="text-2xl md:text-3xl font-bold mb-2">
@@ -98,7 +101,7 @@ function HomePage() {
         <div className="relative col-span-1">
           <div
             className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-            style={{ backgroundImage: "url('realtime.jpg')" }}
+            style={{ backgroundImage: `url(${realTime})` }}
           ></div>
           <div className="relative z-20 p-20 md:p-20 bg-black bg-opacity-80 h-full opacity-80 transition-opacity duration-500 hover:opacity-100">
             <h2 className="text-2xl md:text-3xl font-bold mb-2">REAL TIME</h2>
@@ -109,7 +112,7 @@ function HomePage() {
         <div className="relative col-span-1">
           <div
             className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-            style={{ backgroundImage: "url('Nature.jpeg')" }}
+            style={{ backgroundImage: `url(${natureImage})` }}
           ></div>
           <div className="relative z-20 p-20 md:p-20 bg-black bg-opacity-80 h-full opacity-75 transition-opacity duration-500 hover:opacity-100">
             <h2 className="text-2xl md:text-3xl font-bold mb-2">PERSONALIZE</h2>
@@ -124,10 +127,8 @@ function HomePage() {
           loop
           muted
           className="absolute inset-0 w-full h-full object-cover z-0"
-        >
-          <source src="test7.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          src={secondVideo}
+        ></video>
 
         <div className="absolute inset-0 bg-black opacity-70"></div>
 
