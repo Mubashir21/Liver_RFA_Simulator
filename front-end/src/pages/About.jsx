@@ -121,7 +121,7 @@ function About() {
           <div className="relative col-span-1">
             <div
               className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-              style={{ backgroundImage: "url('jaundice.jpg')" }}
+              style={{ backgroundImage: "url('src/assets/pictures/jaundice.jpg')" }}
             ></div>
             <div className="relative z-20 p-8 md:p-20 bg-black bg-opacity-80 h-full opacity-0 transition-opacity duration-200 hover:opacity-100 flex items-center justify-center">
               <h2 className="text-center text-base md:text-xl font-semibold text-white">
@@ -134,7 +134,7 @@ function About() {
           <div className="relative col-span-1">
             <div
               className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-              style={{ backgroundImage: "url('abdominal-pain.jpg')" }}
+              style={{ backgroundImage: "url('src/assets/pictures/abdominal-pain.jpg')" }}
             ></div>
             <div className="relative z-20 p-8 md:p-20 bg-black bg-opacity-80 h-full opacity-0 transition-opacity duration-300 hover:opacity-100 flex items-center justify-center">
               <h2 className="text-center text-base md:text-xl font-semibold text-white">
@@ -147,7 +147,7 @@ function About() {
           <div className="relative col-span-1">
             <div
               className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-              style={{ backgroundImage: "url('nausea.png')" }}
+              style={{ backgroundImage: "url('src/assets/pictures/nausea.png')" }}
             ></div>
             <div className="relative z-20 p-8 md:p-20 bg-black bg-opacity-80 h-full opacity-0 transition-opacity duration-400 hover:opacity-100 flex items-center justify-center">
               <h2 className="text-center text-base md:text-xl font-semibold text-white">
