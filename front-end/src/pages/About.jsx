@@ -1,20 +1,27 @@
 import React, { useState } from "react";
+import abstractYellowVideo from "../assets/videos/abstract-yellow.mp4";
+import greyscaleVideo from "../assets/videos/greyscale.mp4";
+import aboutBgVideo from "../assets/videos/aboutbg.mp4";
+import handsVideo from "../assets/videos/hands.mp4";
+import liverImage from "../assets/pictures/Liver-cancer.jpg";
+import jaundiceImage from "../assets/pictures/jaundice.jpg";
+import abdominalPainImage from "../assets/pictures/abdominal-pain.jpg";
+import nauseaImage from "../assets/pictures/nausea.png";
+import liverIcon from "../assets/pictures/liver.png";
+import neuralNetworkIcon from "../assets/pictures/neuralnetwork.png";
+import surgeryIcon from "../assets/pictures/surgery.png";
+import schoolIcon from "../assets/pictures/school.png";
+import careIcon from "../assets/pictures/care.png";
+import researchIcon from "../assets/pictures/research.png";
 
 function About() {
-  const backgroundVideos = {
-    part1: "src/assets/videos/abstract-yellow.mp4",
-    part2: "src/assets/videos/greyscale.mp4",
-    part3: "src/assets/videos/aboutbg.mp4",
-    part4: "src/assets/videos/hands.mp4",
-  };
-
   return (
     <div>
       {/* First part */}
       <section className="relative h-screen">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
-          src={backgroundVideos.part1}
+          src={abstractYellowVideo}
           autoPlay
           loop
           muted
@@ -48,7 +55,7 @@ function About() {
               <br />
               <img
                 className="mx-auto mb-4 pl-20 object-cover w-auto h-1/4"
-                src="src/assets/pictures/Liver-cancer.jpg"
+                src={liverImage}
                 alt="Liver"
               />{" "}
               {/* Adjusted image size for different screen sizes */}
@@ -100,7 +107,7 @@ function About() {
         {/* Background video */}
         <video
           className="absolute top-0 left-0 w-full h-full object-cover z-0"
-          src={backgroundVideos.part1}
+          src={abstractYellowVideo}
           autoPlay
           loop
           muted
@@ -121,7 +128,7 @@ function About() {
           <div className="relative col-span-1">
             <div
               className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-              style={{ backgroundImage: "url('src/assets/pictures/jaundice.jpg')" }}
+              style={{ backgroundImage: `url(${jaundiceImage})` }}
             ></div>
             <div className="relative z-20 p-8 md:p-20 bg-black bg-opacity-80 h-full opacity-0 transition-opacity duration-200 hover:opacity-100 flex items-center justify-center">
               <h2 className="text-center text-base md:text-xl font-semibold text-white">
@@ -134,7 +141,9 @@ function About() {
           <div className="relative col-span-1">
             <div
               className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-              style={{ backgroundImage: "url('src/assets/pictures/abdominal-pain.jpg')" }}
+              style={{
+                backgroundImage: `url(${abdominalPainImage})`,
+              }}
             ></div>
             <div className="relative z-20 p-8 md:p-20 bg-black bg-opacity-80 h-full opacity-0 transition-opacity duration-300 hover:opacity-100 flex items-center justify-center">
               <h2 className="text-center text-base md:text-xl font-semibold text-white">
@@ -147,7 +156,9 @@ function About() {
           <div className="relative col-span-1">
             <div
               className="absolute inset-0 bg-cover bg-center z-10 transition-opacity duration-500 hover:opacity-100"
-              style={{ backgroundImage: "url('src/assets/pictures/nausea.png')" }}
+              style={{
+                backgroundImage: `url(${nauseaImage})`,
+              }}
             ></div>
             <div className="relative z-20 p-8 md:p-20 bg-black bg-opacity-80 h-full opacity-0 transition-opacity duration-400 hover:opacity-100 flex items-center justify-center">
               <h2 className="text-center text-base md:text-xl font-semibold text-white">
@@ -162,7 +173,7 @@ function About() {
         <div className="relative h-screen">
           <video
             className="background-video w-full h-full object-cover"
-            src={backgroundVideos.part2}
+            src={greyscaleVideo}
             autoPlay
             loop
             muted
@@ -197,7 +208,7 @@ function About() {
           <div className="absolute inset-0 bg-black opacity-65"></div>
           <video
             className="background-video w-full h-full object-cover"
-            src={backgroundVideos.part3}
+            src={aboutBgVideo}
             autoPlay
             loop
             muted
@@ -216,7 +227,7 @@ function About() {
               <br />
               <img
                 className="mx-auto mb-4 rounded-full object-cover w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80"
-                src="src/assets/pictures/liver.png"
+                src={liverIcon}
                 alt="Liver"
               />{" "}
               {/* Adjusted image size for different screen sizes */}
@@ -252,7 +263,7 @@ function About() {
           <div className="absolute inset-0 bg-black opacity-60"></div>
           <video
             className="background-video w-full h-full object-cover"
-            src={backgroundVideos.part3}
+            src={aboutBgVideo}
             autoPlay
             loop
             muted
@@ -285,7 +296,7 @@ function About() {
 
                   <div className="flex items-center justify-center">
                     <img
-                      src="src/assets/pictures/neuralnetwork.png"
+                      src={neuralNetworkIcon}
                       alt="Neural Networks Icon"
                       className="w-20 h-20"
                     />
@@ -308,7 +319,7 @@ function About() {
                   </p>
                   <div className="flex items-center justify-center">
                     <img
-                      src="src/assets/pictures/surgery.png"
+                      src={surgeryIcon}
                       alt="Surgery Icon"
                       className="w-20 h-20"
                     />
@@ -330,7 +341,7 @@ function About() {
           <div className="absolute inset-0 bg-black opacity-60"></div>
           <video
             className="background-video w-full h-full object-cover"
-            src={backgroundVideos.part3}
+            src={aboutBgVideo}
             autoPlay
             loop
             muted
@@ -354,7 +365,7 @@ function About() {
               <div className="flex flex-col mb-8">
                 <div className="flex items-center">
                   <img
-                    src="src/assets/pictures/school.png"
+                    src={schoolIcon}
                     alt="Leading Institutions Icon"
                     className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 mr-4 lg:mr-10"
                   />
@@ -364,7 +375,7 @@ function About() {
                 </div>
                 <div className="flex items-center mt-5 lg:mt-10">
                   <img
-                    src="src/assets/pictures/care.png"
+                    src={careIcon}
                     alt="Medical Professionals Icon"
                     className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 mr-4 lg:mr-10"
                   />
@@ -374,7 +385,7 @@ function About() {
                 </div>
                 <div className="flex items-center mt-5 lg:mt-10">
                   <img
-                    src="src/assets/pictures/research.png"
+                    src={researchIcon}
                     alt="Researchers Icon"
                     className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 mr-4 lg:mr-10"
                   />
@@ -394,7 +405,7 @@ function About() {
           <div className="absolute inset-0 bg-black opacity-60"></div>
           <video
             className="background-video w-full h-full object-cover"
-            src={backgroundVideos.part4}
+            src={handsVideo}
             autoPlay
             loop
             muted

@@ -12,17 +12,22 @@ import os
 
 matplotlib.use('Agg')  # Use the 'Agg' backend for file generation without display
 
+# Function to load the PyTorch model
 def load_model(model_path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(device)
+    # Define the model architecture
     model = FNO2d(n_modes_height=32, n_modes_width=32, hidden_channels=32, projection_channels=101,
                 in_channels=4, out_channels=1).to(device)
 
+    # Load the model weights
     model.load_state_dict(torch.load(model_path))
+    # Set the model to evaluation mode
     model.eval()
 
     return model
 
+# Function to plot an image using Matplotlib
 def plot_image(x, index, message):
     # plt.title(f"Time={sample1 * 5}")
 
@@ -36,6 +41,7 @@ def plot_image(x, index, message):
     plt.title(f"{message} at time={index * 5}")
     plt.show()
 
+# Function to create and save an image
 def makeAndSaveImage(sample, index):
     vmin = 0  # Minimum temperature value
     vmax = 80  # Maximum temperature value
@@ -48,28 +54,36 @@ def makeAndSaveImage(sample, index):
     plt.savefig(f'static/temp_pictures/plot_{index}.png') # Save each plot
     plt.close()
     
+# Function to create a video from image frames
 def makeVideo(samples):
 
     image_num = len(samples)
 
+    # Create and save images for each time step
     for i in range(image_num):
         makeAndSaveImage(samples[i].squeeze().squeeze(), i)
 
     images = []
+    # Read images for each time step
     for time_point in tqdm(range(len(samples))):
         images.append(imageio.imread(f'static/temp_pictures/plot_{time_point}.png'))
 
+    # Generate a unique filename based on the current time
     file_name = filenameMaker()
+    # Save images as a video
     imageio.mimsave(f'static/simulation_videos/{file_name}.mp4', images, fps=24) # Save as MP4
 
+    # Delete temporary image files
     delete_folder_contents("static/temp_pictures")
     
     return file_name
 
+# Function to generate a unique filename based on the current time
 def filenameMaker():
     x = datetime.datetime.now()
-    return f"{x.strftime('%H')}_{x.strftime('%M')}_{x.strftime('%S')} - ({x.strftime('%d')}-{x.strftime('%m')}-{x.strftime('%y')})"
+    return f"{x.strftime('%H')}_{x.strftime('%M')}_{x.strftime('%S')} - ({x.strftime('%d')}-{x.strftime('%m')}-{x.strftime('%y')}"
 
+# Function to delete all files and subdirectories within a specified folder
 def delete_folder_contents(folder_path):
     # Iterate over all the files and subdirectories in the given folder
     for item in os.listdir(folder_path):
@@ -84,6 +98,7 @@ def delete_folder_contents(folder_path):
             # After deleting the contents, remove the empty directory
             os.rmdir(item_path)
 
+# Function to normalize input parameters within a predefined range
 def normalizeParams(k, w, sig):
 
     min_range = 5
@@ -95,7 +110,3 @@ def normalizeParams(k, w, sig):
     norm_sig = round(((sig - params_min_max['case_w_sig']["min"]) / (params_min_max['case_w_sig']["max"] - params_min_max['case_w_sig']["min"])) * (max_range - min_range) + min_range)
 
     return [norm_k, norm_w, norm_sig]
-
-
-if __name__ == "__main__":
-    normalizeParams(0.5, 0.0050, 0.007)
