@@ -75,6 +75,66 @@ def AddMoreChannels():
     
     print(f"Saved the files successfully!")
 
+def AddMoreNormalizedChannels():
+    case_k_values = {"T_k1" : 5, "T_k2" : 41, "T_k3" : 77, "T_k4" : 114, "T_k5" : 150}
+    case_w_values = {"T_w1" : 5, "T_w2" : 41, "T_w3" : 77, "T_w4" : 114, "T_w5" : 150}
+    case_sig_values = {"T_sig1" : 5, "T_sig2" : 41, "T_sig3" : 77, "T_sig4" : 114, "T_sig5" : 150}
+    
+    # Initialize an empty dictionary to store arrays
+    value_arrays = {} #rename this dict
+
+    # Iterate through each dictionary
+    for case_values in [case_k_values, case_w_values, case_sig_values]:
+        for key, value in case_values.items():
+            # Create an array of size 101 by 101 with all elements set to the corresponding value
+            value_arrays[key] = np.full((101, 101), value)
+
+    case_k, case_w, case_sig = retrieveData()
+    case_k = case_k.numpy()
+    case_w = case_w.numpy()
+    case_sig = case_sig.numpy()
+
+    new_case_k = np.empty((5, 121, 4, 101, 101))
+    for i in range(len(case_k)):
+        current_sample = case_k[i] # current sample
+
+        new_channels = np.stack((value_arrays[f"T_k{i + 1}"], value_arrays["T_w3"], value_arrays["T_sig3"]), axis=0)
+        new_channels_reshaped = new_channels.reshape(1, 3, 101, 101)
+        new_channels_repeated = np.repeat(new_channels_reshaped, current_sample.shape[0], axis=0)
+        final_array = np.concatenate((current_sample, new_channels_repeated), axis=1)
+        final_array_reshaped = final_array.reshape(1, 121, 4, 101, 101)
+        new_case_k[i] = final_array_reshaped # problematic from here
+    new_case_k = torch.tensor(new_case_k).to(torch.float)
+    torch.save(new_case_k, "dataset/normalized_with_input_parameters/case_k_params_normalized.pt")
+
+    new_case_w = np.empty((5, 121, 4, 101, 101))
+    for i in range(len(case_w)):
+        current_sample = case_w[i] # current sample
+
+        new_channels = np.stack((value_arrays["T_k3"], value_arrays[f"T_w{i + 1}"], value_arrays["T_sig3"]), axis=0)
+        new_channels_reshaped = new_channels.reshape(1, 3, 101, 101)
+        new_channels_repeated = np.repeat(new_channels_reshaped, current_sample.shape[0], axis=0)
+        final_array = np.concatenate((current_sample, new_channels_repeated), axis=1)
+        final_array_reshaped = final_array.reshape(1, 121, 4, 101, 101)
+        new_case_w[i] = final_array_reshaped # problematic from here
+    new_case_w = torch.tensor(new_case_w).to(torch.float)
+    torch.save(new_case_w, "dataset/normalized_with_input_parameters/case_w_params_normalized.pt")
+
+    new_case_sig = np.empty((5, 121, 4, 101, 101))
+    for i in range(len(case_sig)):
+        current_sample = case_sig[i] # current sample
+
+        new_channels = np.stack((value_arrays["T_k3"], value_arrays["T_w3"], value_arrays[f"T_sig{i + 1}"]), axis=0)
+        new_channels_reshaped = new_channels.reshape(1, 3, 101, 101)
+        new_channels_repeated = np.repeat(new_channels_reshaped, current_sample.shape[0], axis=0)
+        final_array = np.concatenate((current_sample, new_channels_repeated), axis=1)
+        final_array_reshaped = final_array.reshape(1, 121, 4, 101, 101)
+        new_case_sig[i] = final_array_reshaped # problematic from here
+    new_case_sig = torch.tensor(new_case_sig).to(torch.float)
+    torch.save(new_case_sig, "dataset/normalized_with_input_parameters/case_sig_params_normalized.pt")
+    
+    print(f"Saved the files successfully!")
+
 def prepareData():
     case_k, case_w, case_sig = retrieveData()
     case_k = case_k.tolist() 
@@ -163,4 +223,4 @@ def getDataloader(X_data, y_data):
     return DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
 if __name__ == "__main__":
-    AddMoreChannels()
+    AddMoreNormalizedChannels()

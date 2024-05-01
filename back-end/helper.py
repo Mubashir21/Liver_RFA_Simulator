@@ -83,3 +83,19 @@ def delete_folder_contents(folder_path):
             delete_folder_contents(item_path)
             # After deleting the contents, remove the empty directory
             os.rmdir(item_path)
+
+def normalizeParams(k, w, sig):
+
+    min_range = 5
+    max_range = 150
+    params_min_max = {"case_k":{"min":0.46, "max":0.54}, "case_w_sig":{"min":0.0045, "max":0.0085}}
+
+    norm_k = round(((k - params_min_max['case_k']["min"]) / (params_min_max['case_k']["max"] - params_min_max['case_k']["min"])) * (max_range - min_range) + min_range)
+    norm_w = round(((w - params_min_max['case_w_sig']["min"]) / (params_min_max['case_w_sig']["max"] - params_min_max['case_w_sig']["min"])) * (max_range - min_range) + min_range)
+    norm_sig = round(((sig - params_min_max['case_w_sig']["min"]) / (params_min_max['case_w_sig']["max"] - params_min_max['case_w_sig']["min"])) * (max_range - min_range) + min_range)
+
+    return [norm_k, norm_w, norm_sig]
+
+
+if __name__ == "__main__":
+    normalizeParams(0.5, 0.0050, 0.007)

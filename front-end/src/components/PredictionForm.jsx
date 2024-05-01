@@ -83,6 +83,9 @@ function PredictionForm() {
     } else if (!sig || sig < 0.0045 || sig > 0.0085) {
       alert("Enter a valid input for sig. Range: 0.0045-0.0085");
       count++;
+    } else if (!duration || duration < 50 || sig > 120) {
+      alert("Enter a valid input for sig. Range: 50-120 seconds.");
+      count++;
     }
 
     if (count > 0) {
@@ -140,6 +143,11 @@ function PredictionForm() {
     }
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
+      setDuration("");
+      setFile(null);
+      setK("");
+      setSig("");
+      setW("");
     }
   };
 

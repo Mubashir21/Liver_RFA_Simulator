@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, send_file
 import torch
-from helper import load_model, plot_image, makeVideo
+from helper import load_model, plot_image, makeVideo, normalizeParams
 from config import MODEL_PATH
 from flask_cors import CORS
 import numpy as np
@@ -26,7 +26,7 @@ def predict():
     w = float(request.form.get('w'))
     sig = float(request.form.get('sig'))
     duration = int(request.form.get('duration'))
-    print(k, w, sig, duration, type(k), type(w), type(sig), type(duration))
+    k, w, sig = normalizeParams(k, w, sig)
 
 
     if file and file.filename.endswith('.npy'):
@@ -37,9 +37,6 @@ def predict():
         input_tensor = torch.tensor(array).unsqueeze(0).unsqueeze(0).to(torch.float).to(device)
         prediction = input_tensor
         simulation = []
-        k_val = 3
-        w_val = 1
-        sig_val = 1
         params_tensor = torch.tensor([[k, w, sig]]).view(1, 3, 1, 1).expand(-1, -1, 101, 101).to(device)
         input = torch.cat((prediction, params_tensor), dim=1)
         
