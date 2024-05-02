@@ -1,0 +1,15 @@
+flask
+numpy
+tqdm
+scipy
+matplotlib
+imageio
+neuraloperator
+tensorly
+tensorly-torch
+wandb
+zarr
+torch-harmonics
+torch==1.10.0+cu121
+torchvision==0.11.1+cu121
+torchaudio==0.10.0+cu121

@@ -1,49 +1,58 @@
-# Getting started with setup
+# Getting Started with Setup
+
 Welcome to the everything repo concerning our SEGP project - Group K.
 
-## Pull the entire repository
-Watch YouTube turorial on how to do this if you are unaware.
+## Pull the Entire Repository
 
-## To run the front-end i.e. React
-1. Download Node.js from the internet to run javaScript on your computer.
-2. Make sure you are in the front-end directory.
-3. Run the following in terminal:
+If you're unfamiliar with pulling repositories, you can watch a YouTube tutorial on how to do this.
+
+## Running the Front-end (React)
+
+To run the front-end of our application, which is built using React, follow these steps:
+
+1. **Install Node.js**: Node.js is required to run JavaScript on your computer. You can download and install it from [here](https://nodejs.org/).
+
+2. **Install the `serve` Package**: `serve` is a package that provides a simple HTTP server for serving static files. You can install it globally using npm:
+
 ```
-npm run dev
+npm install -g serve
 ```
 
-## To run the back-end i.e. Flask
-1. Have python installed.
-2. Make sure to be in the back-end directory.
-3. Activate virtual environment by running the following in terminal:
+3. **Navigate to the Build Directory**: Once installed, navigate to the build directory of your React application.
+
+4. **Run the Server**: Use the following command to serve your application:
+
+```
+serve -s build
+```
+
+This command starts a static file server and serves your built React application. Ensure that the server is running.
+
+## Running the Back-end (Flask)
+
+To run the back-end of our application, which is built using Flask, follow these steps:
+
+1. **Install Python**: Python is required to run the Flask server. You can download and install it from [here](https://www.python.org/downloads/).
+
+2. **Activate Virtual Environment**: Navigate to the back-end directory and activate the virtual environment by running the following command in the terminal:
+
 ```
 venv/Scripts/activate.ps1
 ```
-4. Install the following packages:
+
+3. **Install Dependencies**: Install the required Python packages using pip:
+
 ```
-pip install flask
-pip install numpy
-pip install tqdm
-pip install scipy.io
-pip install matplotlib
-pip install imageio
-pip install neuraloperator
-pip install tensorly
-pip install tensorly-torch
-pip install wandb
-pip install zarr
-pip install torch-harmonics
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install -r requirements.txt
 ```
-5. Run the following python script:
+
+4. **Run the Server**: Start the Flask server by running the following command:
+
 ```
 python app.py
 ```
 
-## To run the MLPipeline
-Coming soon. Stay tuned!
-
 ## Notes
-The back-end and the front-end servers must be run simultaneously for the website to work effectively.
 
-If you encounter any problem with installing and the running the code, please do not hesitate to contact Mubashir.
+- Ensure that both the front-end and back-end servers are running simultaneously for the website to work effectively.
+- If you encounter any problems with installing or running the code, please don't hesitate to contact Mubashir.
