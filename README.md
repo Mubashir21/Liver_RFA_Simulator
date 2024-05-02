@@ -4,7 +4,9 @@ Welcome to the everything repo concerning our SEGP project - Group K.
 
 ## Pull the Entire Repository
 
-If you're unfamiliar with pulling repositories, you can watch a YouTube tutorial on how to do this.
+```
+git clone https://github.com/Mubashir21/Liver_RFA_Simulator.git
+```
 
 ## Running the Front-end (React)
 
