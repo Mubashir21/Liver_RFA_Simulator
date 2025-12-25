@@ -1,60 +1,94 @@
-# Getting Started with Setup
+# Liver RFA Simulator
 
-Welcome to the everything repo concerning our SEGP project - Group K.
+A full-stack simulation system for **Liver Radiofrequency Ablation (RFA)** with GPU-accelerated Python backend (Flask + PyTorch/CUDA), React frontend, and Docker deployment.
 
-## Pull the Entire Repository
+---
 
-```
-git clone https://github.com/Mubashir21/Liver_RFA_Simulator.git
-```
+## 🔧 Requirements
 
-## Running the Front-end (React)
+- Docker Desktop
+- NVIDIA GPU with drivers
+- WSL 2 (Windows)
+- NVIDIA Container Toolkit
 
-To run the front-end of our application, which is built using React, follow these steps:
+Verify GPU support:
 
-1. **Install Node.js**: Node.js is required to run JavaScript on your computer. You can download and install it from [here](https://nodejs.org/).
-
-2. **Install the `serve` Package**: `serve` is a package that provides a simple HTTP server for serving static files. You can install it globally using npm:
-
-```
-npm install -g serve
+```bash
+nvidia-smi
+docker run --rm --gpus all nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi
 ```
 
-3. **Navigate to the Build Directory**: Once installed, navigate to the build directory of your React application.
+---
 
-4. **Run the Server**: Use the following command to serve your application:
+## 🚀 Getting Started
 
-```
-serve -s build
-```
+### 1. Clone the repository
 
-This command starts a static file server and serves your built React application. Ensure that the server is running.
-
-## Running the Back-end (Flask)
-
-To run the back-end of our application, which is built using Flask, follow these steps:
-
-1. **Install Python**: Python is required to run the Flask server. You can download and install it from [here](https://www.python.org/downloads/).
-
-2. **Activate Virtual Environment**: Navigate to the back-end directory and activate the virtual environment by running the following command in the terminal:
-
-```
-venv/Scripts/activate.ps1
+```bash
+git clone <your-repo-url>
+cd Liver_RFA_Simulator
 ```
 
-3. **Install Dependencies**: Install the required Python packages using pip:
+### 2. Create data directory
 
-```
-pip install -r requirements.txt
-```
-
-4. **Run the Server**: Start the Flask server by running the following command:
-
-```
-python app.py
+```bash
+mkdir -p backend/data
 ```
 
-## Notes
+### 3. Start the system
 
-- Ensure that both the front-end and back-end servers are running simultaneously for the website to work effectively.
-- If you encounter any problems with installing or running the code, please don't hesitate to contact Mubashir.
+```bash
+docker compose up --build
+```
+
+- **Backend:** http://localhost:5000
+- **Frontend:** http://localhost:5173
+
+---
+
+## 🧠 Backend API
+
+| Method | Route                | Description           |
+| ------ | -------------------- | --------------------- |
+| GET    | `/`                  | Health check          |
+| POST   | `/predict`           | Run RFA simulation    |
+| GET    | `/videos/<filename>` | Fetch generated video |
+
+**Example:**
+
+```bash
+curl -X POST http://localhost:5000/predict
+```
+
+---
+
+## 🎥 Video Storage
+
+Generated videos persist at:
+
+```
+backend/data/simulation_videos
+```
+
+---
+
+## 🛑 Stopping the System
+
+```bash
+docker compose down
+```
+
+---
+
+## 🧪 Debugging
+
+```bash
+# Check containers
+docker compose ps
+
+# View logs
+docker compose logs backend
+
+# Verify GPU
+docker compose exec backend python3 -c "import torch; print(torch.cuda.is_available())"
+```
