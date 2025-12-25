@@ -65,7 +65,7 @@ def makeVideo(samples) -> str:
             frames.append(imageio.imread(tmp_path / f"plot_{i}.png"))
 
         file_name = filenameMaker()
-        out_path = Path("static/simulation_videos")
+        out_path = Path("/app/static/simulation_videos")
         out_path.mkdir(parents=True, exist_ok=True)
 
         video_file = out_path / f"{file_name}.mp4"
