@@ -8,4 +8,13 @@ export default defineConfig({
     outDir: "build", // Output directory set to 'build'
     // Other build-specific settings...
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://backend:5000",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

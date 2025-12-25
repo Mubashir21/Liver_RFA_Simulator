@@ -48,6 +48,8 @@ function LoadingModal({ isLoading, onClose }) {
 }
 
 function PredictionForm() {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
   const [file, setFile] = useState(null);
   const [videoPath, setVideoPath] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -121,7 +123,7 @@ function PredictionForm() {
       formData.append("sig", sig);
       formData.append("duration", duration);
 
-      const response = await fetch("http://localhost:5000/predict", {
+      const response = await fetch("api/predict", {
         method: "POST",
         body: formData,
       });

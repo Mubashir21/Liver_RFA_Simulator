@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/data:/app/static
+    gpus: all
+    restart: unless-stopped
+  frontend:
+    build: ./front-end 
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    depends_on:
+      - backend
